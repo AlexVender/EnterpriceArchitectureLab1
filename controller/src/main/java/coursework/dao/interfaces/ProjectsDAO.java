@@ -3,9 +3,10 @@ package coursework.dao.interfaces;
 import coursework.dao.exceptions.DAOException;
 import coursework.entities.ProjectEntity;
 
+import javax.ejb.Remote;
 import java.util.List;
 
-
+@Remote
 public interface ProjectsDAO {
     Integer create(ProjectEntity project) throws DAOException;
     

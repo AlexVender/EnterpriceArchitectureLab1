@@ -5,12 +5,18 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import javax.ejb.Stateless;
 
-public class HibernateSessionFactory {
+
+@Stateless
+public class HibernateSessionFactoryProvider implements SessionFactoryProvider {
     
-    private static SessionFactory sessionFactory = buildSessionFactory();
+    private SessionFactory sessionFactory = buildSessionFactory();
     
-    protected static SessionFactory buildSessionFactory() {
+    public HibernateSessionFactoryProvider() {
+    }
+    
+    protected SessionFactory buildSessionFactory() {
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure()
                 .build();
@@ -20,19 +26,18 @@ public class HibernateSessionFactory {
         }
         catch (Exception e) {
             StandardServiceRegistryBuilder.destroy(registry);
-            throw new ExceptionInInitializerError("Initial SessionFactory failed" + e);
+            throw new ExceptionInInitializerError("Initial SessionFactoryProvider failed" + e);
         }
         
         return sessionFactory;
     }
     
     
-    public static SessionFactory getSessionFactory() {
+    public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
     
-    public static void shutdown() {
+    public void shutdown() {
         getSessionFactory().close();
     }
-    
 }

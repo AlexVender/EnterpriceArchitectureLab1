@@ -7,7 +7,8 @@ import coursework.datatypes.Status;
 import coursework.entities.ProjectEntity;
 import coursework.entities.TaskEntity;
 import coursework.entities.UserEntity;
-import coursework.utils.HibernateSessionFactory;
+import coursework.utils.EJBBeanProvider;
+import coursework.utils.SessionFactoryProvider;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -18,12 +19,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-/**
- * Created by chanta on 20.03.17.
- */
 public class TasksFilter {
     private final static Logger logger = Logger.getLogger(AbstractDAO.class);
-
+    private final SessionFactoryProvider sessionFactoryProvider = EJBBeanProvider.getInstance().getSessionFactoryProvider();
+    
     private String name;
     private Priority priority;
     private Status status;
@@ -79,7 +78,7 @@ public class TasksFilter {
 
 
     public List<TaskEntity> find() throws DAOException {
-        try (Session session = HibernateSessionFactory.getSessionFactory().openSession()) {
+        try (Session session = sessionFactoryProvider.getSessionFactory().openSession()) {
 
             Class resultType = TaskEntity.class;
             Criteria cr = session.createCriteria(resultType);

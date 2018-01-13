@@ -3,9 +3,11 @@ package coursework.dao.interfaces;
 import coursework.dao.exceptions.DAOException;
 import coursework.entities.UserEntity;
 
+import javax.ejb.Remote;
 import java.util.List;
 
 
+@Remote
 public interface UsersDAO {
     Integer create(UserEntity user) throws DAOException;
     

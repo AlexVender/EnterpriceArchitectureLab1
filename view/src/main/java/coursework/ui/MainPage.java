@@ -8,9 +8,6 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
-import coursework.dao.ProjectsDAOImpl;
-import coursework.dao.TasksDAOImpl;
-import coursework.dao.UsersDAOImpl;
 import coursework.dao.interfaces.ProjectsDAO;
 import coursework.dao.interfaces.TasksDAO;
 import coursework.dao.interfaces.UsersDAO;
@@ -20,6 +17,7 @@ import coursework.entities.ProjectEntity;
 import coursework.entities.TaskEntity;
 import coursework.entities.UserEntity;
 import coursework.filters.TasksFilter;
+import coursework.utils.EJBBeanProvider;
 import coursework.utils.EnumItemCaptionGenerator;
 import coursework.utils.EnumRenderer;
 import coursework.utils.LocalDateRenderer;
@@ -63,9 +61,9 @@ public class MainPage extends UI {
     private final ComboBox<UserEntity> filterAssignee = new ComboBox<>("Assignee");
     private final ComboBox<ProjectEntity> filterProject = new ComboBox<>("Project");
     
-    private TasksDAO tasksDAO = new TasksDAOImpl();
-    private UsersDAO usersDAO = new UsersDAOImpl();
-    private ProjectsDAO projectsDAO = new ProjectsDAOImpl();
+    private TasksDAO tasksDAO = EJBBeanProvider.getInstance().getTasksDAO();
+    private UsersDAO usersDAO = EJBBeanProvider.getInstance().getUsersDAO();
+    private ProjectsDAO projectsDAO = EJBBeanProvider.getInstance().getProjectsDAO();
     
     private TasksFilter filter = new TasksFilter();
     

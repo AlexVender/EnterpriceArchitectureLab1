@@ -4,9 +4,6 @@ import com.vaadin.data.Binder;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.server.Page;
 import com.vaadin.ui.*;
-import coursework.dao.ProjectsDAOImpl;
-import coursework.dao.TasksDAOImpl;
-import coursework.dao.UsersDAOImpl;
 import coursework.dao.exceptions.DAOException;
 import coursework.dao.interfaces.ProjectsDAO;
 import coursework.dao.interfaces.TasksDAO;
@@ -16,6 +13,7 @@ import coursework.datatypes.Status;
 import coursework.entities.ProjectEntity;
 import coursework.entities.TaskEntity;
 import coursework.entities.UserEntity;
+import coursework.utils.EJBBeanProvider;
 import coursework.utils.EnumItemCaptionGenerator;
 
 import java.time.LocalDate;
@@ -41,9 +39,9 @@ public class TaskEditWindow extends Window {
     private final DateField taskDueDate = new DateField("Due Date");
     private final Button btnUpdate = new Button("Update");
     
-    private TasksDAO tasksDAO = new TasksDAOImpl();
-    private UsersDAO usersDAO = new UsersDAOImpl();
-    private ProjectsDAO projectsDAO = new ProjectsDAOImpl();
+    private TasksDAO tasksDAO = EJBBeanProvider.getInstance().getTasksDAO();
+    private UsersDAO usersDAO = EJBBeanProvider.getInstance().getUsersDAO();
+    private ProjectsDAO projectsDAO = EJBBeanProvider.getInstance().getProjectsDAO();
     
     private Binder<TaskEntity> binder = new Binder<>();
     

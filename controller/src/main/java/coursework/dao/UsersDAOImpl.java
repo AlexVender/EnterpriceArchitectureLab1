@@ -4,13 +4,15 @@ import coursework.dao.exceptions.DAOException;
 import coursework.dao.interfaces.UsersDAO;
 import coursework.entities.UserEntity;
 
+import javax.ejb.Stateless;
 import java.util.List;
 
 
-/**
- * Created by chanta on 08.03.17.
- */
+@Stateless
 public class UsersDAOImpl extends AbstractDAO implements UsersDAO {
+    public UsersDAOImpl() {
+    }
+    
     @Override
     public Integer create(UserEntity user) throws DAOException {
         return super.create(user);

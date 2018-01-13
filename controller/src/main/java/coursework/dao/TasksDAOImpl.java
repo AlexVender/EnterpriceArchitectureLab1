@@ -4,13 +4,15 @@ import coursework.dao.exceptions.DAOException;
 import coursework.dao.interfaces.TasksDAO;
 import coursework.entities.TaskEntity;
 
+import javax.ejb.Stateless;
 import java.util.List;
 
 
-/**
- * Created by chanta on 08.03.17.
- */
+@Stateless
 public class TasksDAOImpl extends AbstractDAO implements TasksDAO {
+    public TasksDAOImpl() {
+    }
+    
     @Override
     public Integer create(TaskEntity task) throws DAOException {
         return super.create(task);

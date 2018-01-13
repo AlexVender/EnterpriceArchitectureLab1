@@ -4,13 +4,15 @@ import coursework.dao.exceptions.DAOException;
 import coursework.dao.interfaces.ProjectsDAO;
 import coursework.entities.ProjectEntity;
 
+import javax.ejb.Stateless;
 import java.util.List;
 
 
-/**
- * Created by chanta on 08.03.17.
- */
+@Stateless
 public class ProjectsDAOImpl extends AbstractDAO implements ProjectsDAO {
+    public ProjectsDAOImpl() {
+    }
+    
     @Override
     public Integer create(ProjectEntity project) throws DAOException {
         return super.create(project);
