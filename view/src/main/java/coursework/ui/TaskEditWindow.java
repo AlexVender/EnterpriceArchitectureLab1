@@ -119,11 +119,11 @@ public class TaskEditWindow extends Window {
         btnUpdate.addClickListener(
                 event -> {
                     if (binder.isValid()) {
-                        close();
                         try {
                             tasksDAO.update(binder.getBean());
                             Notification successNotification = new Notification(TASK_UPDATED_SUCCESSFULLY_MESSAGE,
                                     Notification.Type.HUMANIZED_MESSAGE);
+
                             successNotification.setDelayMsec(2000);
                             successNotification.show(Page.getCurrent());
                         } catch (DAOException e) {
@@ -132,7 +132,9 @@ public class TaskEditWindow extends Window {
                             failedNotification.setDelayMsec(3000);
                             failedNotification.show(Page.getCurrent());
                         }
+                        close();
                     }
                 });
+
     }
 }
